@@ -7,3 +7,7 @@ class NiceDocument:
             self.data = json.loads(f.read())
         for k, v in self.data.items():
             setattr(self, k, v)
+
+
+class NiceField:
+    ...
