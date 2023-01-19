@@ -15,7 +15,26 @@ class BaseScene:
 
 
 class HomeScene(BaseScene):
-    ...
+    def __init__(self, screen):
+        super().__init__(screen)
+        self.sprites = pg.sprite.Group()
+        self.menu_img = load_image("menu.png")
+        self.cursor_sprite = pg.sprite.Group()
+        self.cursor = pg.sprite.Sprite(self.cursor_sprite)
+
+    def draw(self):
+        title_font = pg.font.Font(FONT, 128)
+
+        self.screen.fill("#A4784B")
+        self.screen.blit(title_font.render("Pizza Place", True, "#485696"),
+                         ((1280 - title_font.size("Pizza Place")[0]) // 2, 100))
+
+        pg.draw.rect(self.screen, "#766771", (1100, 0, 100, 100))
+        pg.draw.rect(self.screen, "#A3F7CB", (1105, 5, 90, 90))
+        menu = pg.sprite.Sprite(self.sprites)
+        menu.image = self.menu_img
+        menu.rect = self.cursor.image.get_rect()
+        menu.rect.x, menu.rect.y = 1118, 18
 
 
 class SceneManager:
