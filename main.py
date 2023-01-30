@@ -26,4 +26,4 @@ if __name__ == '__main__':
 
         sprites.draw(screen)
         pg.display.flip()
-    pg.quit()=
+    pg.quit()
