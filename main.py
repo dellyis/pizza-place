@@ -1,5 +1,6 @@
 import pygame as pg
 
+from components import Button
 from scene_manager import SceneManager, HomeScene
 
 if __name__ == '__main__':
@@ -17,6 +18,9 @@ if __name__ == '__main__':
 
     sprites = pg.sprite.Group()
 
+    button = Button("Start!", (100, 100), 32, (255, 255, 255), (0, 0, 255), (0, 255, 0), None,
+                    lambda: print("clicked"))
+
     while running:
         scene_manager.draw()
 
@@ -24,6 +28,9 @@ if __name__ == '__main__':
             if event.type == pg.QUIT:
                 running = False
 
+            button.handle_event(event)
+
         sprites.draw(screen)
+        button.draw(screen)
         pg.display.flip()
     pg.quit()
