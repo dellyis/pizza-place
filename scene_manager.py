@@ -13,6 +13,9 @@ class BaseScene:
     def draw(self):
         ...  # Переопределяется для каждой сцены отдельно
 
+    def handle_events(self, event):
+        ...  # Переопределяется для каждой сцены отдельно
+
 
 class HomeScene(BaseScene):
     def __init__(self, screen):
@@ -50,3 +53,8 @@ class SceneManager:
         if not self.current_scene:
             raise Exception("Не выбрана текущая сцена")
         self.current_scene.draw()
+
+    def handle_events(self, event):
+        if not self.current_scene:
+            raise Exception("Не выбрана текущая сцена")
+        self.current_scene.handle_events(event)
