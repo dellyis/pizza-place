@@ -3,8 +3,8 @@ from typing import Dict, Optional
 
 import pygame as pg
 
-from constants import FONT
-from utils import load_image
+from components import Button
+from constants import Colors, FONT
 
 
 class BaseScene:
@@ -21,14 +21,48 @@ class BaseScene:
 class HomeScene(BaseScene):
     def __init__(self, screen):
         super().__init__(screen)
-        self.sprites = pg.sprite.Group()
+        self.button = Button("Start!", (640, 320), 32, Colors.light, Colors.primary,
+                             lambda: scene_manager.change_scene("ClickerScene"))
+        self.button.set_pos(((1280 - self.button.width) // 2, (720 - self.button.height) // 2))
+
+    def draw(self):
+        title_font = pg.font.Font(FONT, 128)
+
+        self.screen.fill(Colors.warning)
+        self.screen.blit(title_font.render("Pizza Place", True, "#485696"),
+                         ((1280 - title_font.size("Pizza Place")[0]) // 2, 100))
+
+        self.button.draw(self.screen)
+
+    def handle_events(self, event):
+        self.button.handle_event(event)
+
+
+class ClickerScene(BaseScene):
+    def __init__(self, screen):
+        super().__init__(screen)
+        self.button = Button("Click!", (640, 360), 32, (255, 255, 255), (0, 0, 255), lambda: print("click"))
+        self.button.set_pos(((1280 - self.button.width) // 2, (720 - self.button.height) // 2))
+
+        self.stop = Button("Stop", (0, 0), 32, (255, 255, 255), (0, 0, 255),
+                           lambda: scene_manager.change_scene("ResultScene"))
 
     def draw(self):
         title_font = pg.font.Font(FONT, 128)
 
         self.screen.fill("#A4784B")
-        self.screen.blit(title_font.render("Pizza Place", True, "#485696"),
-                         ((1280 - title_font.size("Pizza Place")[0]) // 2, 100))
+        self.screen.blit(title_font.render("Собери пиццу", True, "#485696"),
+                         ((1280 - title_font.size("Собери пиццу")[0]) // 2, 100))
+
+        self.button.draw(self.screen)
+
+    def handle_events(self, event):
+        self.button.handle_event(event)
+
+
+class ResultScene(BaseScene):
+    # TODO: fill the scene
+    ...
 
 
 class SceneManager:
