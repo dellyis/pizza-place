@@ -1,7 +1,6 @@
 import pygame as pg
 
-from components import Button
-from scene_manager import SceneManager, HomeScene
+from scene_manager import HomeScene, ClickerScene, scene_manager, register_scenes
 
 if __name__ == '__main__':
     pg.init()
@@ -12,25 +11,19 @@ if __name__ == '__main__':
 
     running = True
 
-    scene_manager = SceneManager()
-    scene_manager.add(HomeScene(screen))
+    register_scenes(screen)
     scene_manager.change_scene("HomeScene")
 
     sprites = pg.sprite.Group()
 
-    button = Button("Start!", (100, 100), 32, (255, 255, 255), (0, 0, 255), (0, 255, 0), None,
-                    lambda: print("clicked"))
-
     while running:
         scene_manager.draw()
-
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 running = False
 
-            button.handle_event(event)
+            scene_manager.handle_events(event)
 
         sprites.draw(screen)
-        button.draw(screen)
         pg.display.flip()
     pg.quit()
