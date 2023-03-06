@@ -1,3 +1,4 @@
+import inspect
 from typing import Dict, Optional
 
 import pygame as pg
@@ -58,3 +59,12 @@ class SceneManager:
         if not self.current_scene:
             raise Exception("Не выбрана текущая сцена")
         self.current_scene.handle_events(event)
+
+
+def register_scenes(screen):
+    for name, cls in inspect.getmembers(inspect.getmodule(inspect.currentframe()), inspect.isclass):
+        if name != "BaseScene" and issubclass(cls, BaseScene):
+            scene_manager.add(cls(screen))
+
+
+scene_manager = SceneManager()
