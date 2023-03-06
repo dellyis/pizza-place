@@ -1,44 +1,23 @@
 import json
+from typing import Union
+
+from db_models import Data
 
 
-class NiceDocument:
-    def __init__(self, db_file=".json"):
-        self.db_file = db_file
-        self.data = self._load_data()
-
-    def _load_data(self):
-        try:
-            with open(self.db_file, "r") as f:
-                data = json.load(f)
-        except FileNotFoundError:
-            data = {}
+def load_data(db_file: str = ".json", raw: bool = False) -> Union[Data, dict]:
+    try:
+        with open(db_file, "f") as f:
+            data = json.loads(f.read())
+    except FileNotFoundError:
+        data = {}
+    if raw:
         return data
-
-    def _save_data(self):
-        with open(self.db_file, "w") as f:
-            json.dump(self.data, f)
-
-    def get(self, key):
-        return self.data.get(key, None)
-
-    def set(self, key, value):
-        self.data[key] = value
-        self._save_data()
-
-    def delete(self, key):
-        if key in self.data:
-            del self.data[key]
-            self._save_data()
-
-    def keys(self):
-        return self.data.keys()
-
-    def values(self):
-        return self.data.values()
-
-    def items(self):
-        return self.data.items()
+    return Data(**data)
 
 
-class NiceField:
-    ...
+def save_data(data: Union[Data, dict], db_file: str = ".json"):
+    with open(db_file, "w", encoding="utf-8") as f:
+        if isinstance(data, Data):
+            f.write(json.dumps(data.json()))
+        else:
+            f.write(json.dumps(data))
