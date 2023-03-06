@@ -2,8 +2,11 @@ FONT = "./data/ProstoOne.ttf"
 
 
 class Colors:
-    primary: hex = 0x345678
-    danger: hex = 0xff0000
-    success: hex = 0x00ff00
-    warning: hex = 0xff9b00
-    info: hex = 0x4c4cff
+    primary = (3, 110, 253)
+    secondary = (108, 117, 125)
+    success = (25, 135, 84)
+    danger = (220, 53, 69)
+    warning = (255, 193, 7)
+    info = (13, 202, 240)
+    light = (248, 249, 250)
+    dark = (33, 37, 41)
