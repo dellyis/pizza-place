@@ -8,6 +8,10 @@ class NiceDocument:
         self.wrapper = wrapper
         self.db_file = db_file
 
+    def __getattr__(self, attr):
+        if attr in self.data.__fields__:
+            return getattr(self.data, attr)
+        return getattr(self, attr)
 
 def load_data(db_file: str = ".json", raw: bool = False) -> Union[Data, dict]:
     try:
