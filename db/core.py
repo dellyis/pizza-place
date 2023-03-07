@@ -1,7 +1,9 @@
 import json
-from typing import Union
+from typing import Type, Union
 
-from db_models import Data
+
+class NiceDocument:
+        self.db_file = db_file
 
 
 def load_data(db_file: str = ".json", raw: bool = False) -> Union[Data, dict]:
