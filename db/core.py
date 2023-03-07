@@ -18,7 +18,7 @@ class NiceDocument:
     def load(self):
         try:
             with open(self.db_file) as f:
-                data = json.loads(f.read())
+                data = json.loads(f.read() or "{}")
         except FileNotFoundError:
             data = {}
         self.data = self.wrapper(**data)
