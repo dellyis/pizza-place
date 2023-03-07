@@ -45,7 +45,7 @@ class Button:
         """
         Отрисовать кнопку
 
-        :param surface:поверхность
+        :param surface: поверхность
         """
         pg.draw.rect(surface, self.button_color, self.rect, border_radius=15)
         text_rect = self.image.get_rect(center=self.rect.center)
