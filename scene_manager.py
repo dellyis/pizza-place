@@ -70,7 +70,7 @@ class SceneManager:
         self.scenes: Dict[str, BaseScene] = {}
         self.current_scene: Optional[BaseScene] = None
 
-    def add(self, scene: BaseScene):
+    def register(self, scene: BaseScene):
         if not isinstance(scene, BaseScene):
             raise TypeError("Сцена должна наследоваться от класса BaseScene")
         if scene in self.scenes:
@@ -98,7 +98,7 @@ class SceneManager:
 def register_scenes(screen):
     for name, cls in inspect.getmembers(inspect.getmodule(inspect.currentframe()), inspect.isclass):
         if name != "BaseScene" and issubclass(cls, BaseScene):
-            scene_manager.add(cls(screen))
+            scene_manager.register(cls(screen))
 
 
 scene_manager = SceneManager()
