@@ -67,17 +67,30 @@ class ResultScene(BaseScene):
 
 class SceneManager:
     def __init__(self):
+        """
+        Класс, отвечающий за сцены
+        """
         self.scenes: Dict[str, BaseScene] = {}
         self.current_scene: Optional[BaseScene] = None
 
     def register(self, scene: BaseScene):
+        """
+        Регистрация ново сцены
+
+        :param scene: сцена
+        """
         if not isinstance(scene, BaseScene):
             raise TypeError("Сцена должна наследоваться от класса BaseScene")
         if scene in self.scenes:
             raise ValueError("Сцена уже добавлена")
         self.scenes[scene.__class__.__name__] = scene
 
-    def change_scene(self, name: str):
+    def change_scene(self, name: str, *args, **kwargs):
+        """
+        Изменить текущую строку
+
+        :param name: название сцены
+        """
         if not self.scenes:
             raise Exception("Нет добавленных сцен")
         if name not in self.scenes:
@@ -85,17 +98,30 @@ class SceneManager:
         self.current_scene = self.scenes[name]
 
     def draw(self):
+        """
+        Отрисовать текущую сцену
+        """
         if not self.current_scene:
             raise Exception("Не выбрана текущая сцена")
         self.current_scene.draw()
 
     def handle_events(self, event):
+        """
+        Обработать событие на сцене
+
+        :param event: событие
+        """
         if not self.current_scene:
             raise Exception("Не выбрана текущая сцена")
         self.current_scene.handle_events(event)
 
 
 def register_scenes(screen):
+    """
+    Зарегистрировать все сцены
+
+    :param screen: поверхность
+    """
     for name, cls in inspect.getmembers(inspect.getmodule(inspect.currentframe()), inspect.isclass):
         if name != "BaseScene" and issubclass(cls, BaseScene):
             scene_manager.register(cls(screen))
