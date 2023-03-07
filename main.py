@@ -4,7 +4,6 @@ from scene_manager import HomeScene, ClickerScene, scene_manager, register_scene
 
 if __name__ == '__main__':
     pg.init()
-    pg.font.init()
 
     pg.display.set_caption('Pizza Place')
     screen = pg.display.set_mode((1280, 720))
