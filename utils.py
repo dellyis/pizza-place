@@ -7,7 +7,7 @@ import pygame as pg
 def load_image(name):
     """
     Загрузка изображения
-
+    
     :param name: название изображения
     """
     fullname = os.path.join("data", name)
