@@ -1,8 +1,11 @@
 import json
 from typing import Type, Union
 
+from pydantic import BaseModel
 
 class NiceDocument:
+    def __init__(self, wrapper: Type[BaseModel], db_file: str = ".json"):
+        self.wrapper = wrapper
         self.db_file = db_file
 
 
