@@ -25,4 +25,4 @@ class NiceDocument:
 
     def save(self):
         with open(self.db_file, "w", encoding="utf-8") as f:
-            f.write(json.dumps(self.data.json()))
+            f.write(self.data.json())
