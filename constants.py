@@ -2,6 +2,7 @@ FONT = "./data/ProstoOne.ttf"
 
 
 class Colors:
+    """Основная цвтовая палитра"""
     primary = (3, 110, 253)
     secondary = (108, 117, 125)
     success = (25, 135, 84)
