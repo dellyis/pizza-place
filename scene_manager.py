@@ -35,8 +35,7 @@ class HomeScene(BaseScene):
         title.set_pos(((1280 - title.width) // 2, 200))
         title.draw(self.screen)
 
-        Label(f"Монеты: {data.money}", (25, 600), 32, Colors.warning).draw(self.screen)
-        Label(f"Кристаллы: {data.gems}", (25, 650), 32, Colors.info).draw(self.screen)
+        Label(f"Монеты: {data.money}", (25, 650), 32, Colors.warning).draw(self.screen)
         Label(f"День {data.day}", (25, 25), 32, Colors.warning).draw(self.screen)
 
         self.button.draw(self.screen)
@@ -76,8 +75,7 @@ class ClickerScene(BaseScene):
 
         self.click.draw(self.screen)
 
-        Label(f"Монеты: {data.money}", (25, 600), 32, Colors.warning).draw(self.screen)
-        Label(f"Кристаллы: {data.gems}", (25, 650), 32, Colors.info).draw(self.screen)
+        Label(f"Монеты: {data.money}", (25, 650), 32, Colors.warning).draw(self.screen)
         Label(f"День {data.day}", (25, 25), 32, Colors.warning).draw(self.screen)
 
     def handle_events(self, event):
@@ -108,8 +106,7 @@ class ResultScene(BaseScene):
         title.set_pos(((1280 - title.width) // 2, 250))
         title.draw(self.screen)
 
-        Label(f"Монеты: {data.money}", (25, 600), 32, Colors.warning).draw(self.screen)
-        Label(f"Кристаллы: {data.gems}", (25, 650), 32, Colors.info).draw(self.screen)
+        Label(f"Монеты: {data.money}", (25, 650), 32, Colors.warning).draw(self.screen)
         Label(f"День {data.day}", (25, 25), 32, Colors.warning).draw(self.screen)
 
         self.button.draw(self.screen)
@@ -128,7 +125,6 @@ class UpgradeScene(BaseScene):
         self.upgrades = (
             ("extra_cheese", "Дополнительный сыр (+10% монет за клик)", 200),
             ("speedy_delivery", "Быстрая доставка (+20% монет за клик)", 500),
-            ("sizzling_sausage", "Шипящая колбаса (+0.1% на шанс тройного клика)", 1000),
             ("mighty_meat", "Могучее мясо (+30% монет за клик)", 1000),
             ("supreme_slice", "Высший ломтик (+50% монет за клик)", 1500),
             ("cheesy_crust", "Сырная корочка (+2 монеты за клик)", 2000),
@@ -149,8 +145,7 @@ class UpgradeScene(BaseScene):
             Label(display_name + f" ({getattr(data.upgrades, name)})", (350, 150 + 65 * index), 20, Colors.light).draw(
                 self.screen)
 
-        Label(f"Монеты: {data.money}", (25, 600), 32, Colors.warning).draw(self.screen)
-        Label(f"Кристаллы: {data.gems}", (25, 650), 32, Colors.info).draw(self.screen)
+        Label(f"Монеты: {data.money}", (25, 650), 32, Colors.warning).draw(self.screen)
         Label(f"День {data.day}", (25, 25), 32, Colors.warning).draw(self.screen)
 
         title = Label("Бонусы", (640, 100), 100, Colors.info)
