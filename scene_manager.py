@@ -89,9 +89,9 @@ class ClickerScene(BaseScene):
     def money_inc(self):
         if not self.end_day:
             self.end_day = time() + 60
-        dlt = (1 + 2 * data.upgrades.cheesy_crust + 3 * data.upgrades.pepperoni_power + 5 * data.upgrades.mega_meal) * \
-              (1 + 0.1 * data.upgrades.extra_cheese) * (1 + 0.2 * data.upgrades.speedy_delivery) * \
-              (1 + 0.3 * data.upgrades.mighty_meat) * (1 + 0.5 * data.upgrades.supreme_slice)
+        dlt = (1 + 2 * data.data.upgrades.cheesy_crust + 3 * data.data.upgrades.pepperoni_power + 5 * data.data.upgrades.mega_meal) * \
+              (1 + 0.1 * data.data.upgrades.extra_cheese) * (1 + 0.2 * data.data.upgrades.speedy_delivery) * \
+              (1 + 0.3 * data.data.upgrades.mighty_meat) * (1 + 0.5 * data.data.upgrades.supreme_slice)
         self.money = round(self.money + dlt, 2)
         data.data.money = round(data.money + dlt, 2)
 
@@ -145,12 +145,12 @@ class UpgradeScene(BaseScene):
 
         for index, (name, display_name, price) in enumerate(self.upgrades):
             setattr(self, name,
-                    Button(str(price + (price // 2) * getattr(data.upgrades, name)), (1000, 150 + 65 * index), 20,
-                           Colors.light, Colors.success if price + (price // 2) * getattr(data.upgrades,
+                    Button(str(price + (price // 2) * getattr(data.data.upgrades, name)), (1000, 150 + 65 * index), 20,
+                           Colors.light, Colors.success if price + (price // 2) * getattr(data.data.upgrades,
                                                                                           name) <= data.money
                            else Colors.danger, self.buy(name, price)))
             getattr(self, name).draw(self.screen)
-            Label(display_name + f" ({getattr(data.upgrades, name)})", (350, 150 + 65 * index), 20, Colors.light).draw(
+            Label(display_name + f" ({getattr(data.data.upgrades, name)})", (350, 150 + 65 * index), 20, Colors.light).draw(
                 self.screen)
 
         Label(f"Монеты: {data.money}", (25, 650), 32, Colors.warning).draw(self.screen)
@@ -169,7 +169,7 @@ class UpgradeScene(BaseScene):
 
     def buy(self, name, price):
         def func():
-            now_level = getattr(data.upgrades, name)
+            now_level = getattr(data.data.upgrades, name)
             if price + (price // 2) * now_level <= data.money:
                 setattr(data.data.upgrades, name, now_level + 1)
                 data.data.money -= price + (price // 2) * now_level
