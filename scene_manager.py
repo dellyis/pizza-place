@@ -90,8 +90,8 @@ class ClickerScene(BaseScene):
         if not self.end_day:
             self.end_day = time() + 60
         dlt = (1 + 2 * data.upgrades.cheesy_crust + 3 * data.upgrades.pepperoni_power + 5 * data.upgrades.mega_meal) * \
-               (1 + 0.1 * data.upgrades.extra_cheese) * (1 + 0.2 * data.upgrades.speedy_delivery) * \
-               (1 + 0.3 * data.upgrades.mighty_meat) * (1 + 0.5 * data.upgrades.supreme_slice)
+              (1 + 0.1 * data.upgrades.extra_cheese) * (1 + 0.2 * data.upgrades.speedy_delivery) * \
+              (1 + 0.3 * data.upgrades.mighty_meat) * (1 + 0.5 * data.upgrades.supreme_slice)
         self.money = round(self.money + dlt, 2)
         data.data.money = round(data.money + dlt, 2)
 
