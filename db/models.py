@@ -14,4 +14,4 @@ class Upgrades(BaseModel):
 class Data(BaseModel):
     money: int = 0
     day: int = 1
-    upgrades: Upgrades = {}
+    upgrades: Upgrades = Upgrades()
