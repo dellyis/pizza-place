@@ -2,14 +2,13 @@ from pydantic import BaseModel
 
 
 class Upgrades(BaseModel):
-    extra_cheese: int = 0  # + x0.1
-    speedy_delivery: int = 0  # + x0.2
-    sizzling_sausage: int = 0  # chance for triple click (+0.1%)
-    mighty_meat: int = 0  # + x0.3
-    supreme_slice: int = 0  # + x0.5
-    cheesy_crust: int = 0  # + 2
-    pepperoni_power: int = 0  # + 3
-    mega_meal: int = 0  # + 5
+    extra_cheese: int = 0
+    speedy_delivery: int = 0
+    mighty_meat: int = 0
+    supreme_slice: int = 0
+    cheesy_crust: int = 0
+    pepperoni_power: int = 0
+    mega_meal: int = 0
 
 
 class Ingredients(BaseModel):
@@ -30,7 +29,6 @@ class Ingredients(BaseModel):
 
 class Data(BaseModel):
     money: int = 0
-    gems: int = 0
     day: int = 1
     upgrades: Upgrades = {}
     ingredients: Ingredients = {}
