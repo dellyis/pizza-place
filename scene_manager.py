@@ -132,6 +132,9 @@ class UpgradeScene(BaseScene):
             ("mega_meal", "Мега мясо (+5 монет за клик)", 5000),
         )
 
+        self.back = Button(" < ", (25, 100), 32, Colors.light, Colors.primary,
+                           lambda: scene_manager.change_scene("HomeScene"))
+
     def draw(self):
         self.screen.fill(Colors.secondary)
 
@@ -152,9 +155,12 @@ class UpgradeScene(BaseScene):
         title.set_pos(((1280 - title.width) // 2, 2))
         title.draw(self.screen)
 
+        self.back.draw(self.screen)
+
     def handle_events(self, event):
         for name, *_ in self.upgrades:
             getattr(self, name).handle_event(event)
+        self.back.handle_event(event)
 
     def buy(self, name, price):
         def func():
