@@ -1,6 +1,6 @@
 import pygame as pg
 
-from scene_manager import HomeScene, ClickerScene, scene_manager, register_scenes
+from scene_manager import scene_manager, register_scenes
 
 if __name__ == '__main__':
     pg.init()
