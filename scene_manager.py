@@ -25,7 +25,7 @@ class HomeScene(BaseScene):
     def __init__(self, screen):
         super().__init__(screen)
         self.button = Button("Начать", (640, 320), 32, Colors.light, Colors.primary,
-                             lambda: scene_manager.change_scene("ClickerScene" if data.day % 5 else "EventDayScene"))
+                             lambda: scene_manager.change_scene("ClickerScene"))
         self.button.set_pos(((1280 - self.button.width) // 2, 400))
 
     def draw(self):
@@ -91,18 +91,6 @@ class ClickerScene(BaseScene):
                (1 + 0.3 * data.upgrades.mighty_meat) * (1 + 0.5 * data.upgrades.supreme_slice)
         self.money = round(self.money + dlt, 2)
         data.data.money = round(data.money + dlt, 2)
-
-
-class EventDayScene(BaseScene):
-    def __init__(self, screen):
-        super().__init__(screen)
-        self.button = Button("Тык", (640, 360), 32, Colors.light, Colors.primary, )
-
-    def draw(self):
-        pass
-
-    def handle_events(self, event):
-        self.button.handle_event(event)
 
 
 class ResultScene(BaseScene):
@@ -179,62 +167,6 @@ class UpgradeScene(BaseScene):
             if price + (price // 2) * now_level <= data.money:
                 setattr(data.data.upgrades, name, now_level + 1)
                 data.data.money -= price + (price // 2) * now_level
-                data.save()
-
-        return func
-
-
-class IngredientScene(BaseScene):
-    def __init__(self, screen):
-        super().__init__(screen)
-
-        self.ingredients = (
-            ("anchovy", "Анчоусы", 50000, 10),
-            ("avocado", "Авокадо", 40000, 9),
-            ("cucumber", "Огурцы", 30000, 8),
-            ("grass", "Зелень", 15000, 3),
-            ("mango", "Манго", 25000, 7),
-            ("mushroom", "Грибы", 7500, 1),
-            ("olives", "Оливки", 10000, 2),
-            ("pepper", "Перец", 15000, 4),
-            ("pineapple", "Ананасы", 25000, 6),
-            ("sausage", "Колбаса", 5000, 0),
-            ("tomato", "Помидоры", 20000, 5)
-        )
-
-    def draw(self):
-        self.screen.fill(Colors.secondary)
-
-        for index, (name, display_name, price, gems) in enumerate(self.ingredients):
-            setattr(self, name,
-                    Button(f"{price} монет + {gems} кристаллов" if not getattr(data.ingredients, name) else "Куплено",
-                           (300 + (500 * (index % 2)), 150 + 60 * (index // 2)), 20,
-                           Colors.light, Colors.primary if getattr(data.ingredients,
-                                                                   name) else
-                           Colors.success if data.money >= price and data.gems >= gems else Colors.danger,
-                           self.buy(name, price, gems)))
-            getattr(self, name).draw(self.screen)
-            Label(display_name, (150 + (525 * (index % 2)), 150 + 60 * (index // 2)), 20,
-                  Colors.light).draw(self.screen)
-
-            Label(f"Монеты: {data.money}", (25, 600), 32, Colors.warning).draw(self.screen)
-            Label(f"Кристаллы: {data.gems}", (25, 650), 32, Colors.info).draw(self.screen)
-            Label(f"День {data.day}", (25, 25), 32, Colors.warning).draw(self.screen)
-
-            title = Label("Ингридиенты", (640, 100), 100, Colors.info)
-            title.set_pos(((1280 - title.width) // 2, 2))
-            title.draw(self.screen)
-
-    def handle_events(self, event):
-        for name, *_ in self.ingredients:
-            getattr(self, name).handle_event(event)
-
-    def buy(self, name, price, gems):
-        def func():
-            if not getattr(data.ingredients, name) and price <= data.money and gems <= data.gems:
-                setattr(data.data.ingredients, name, True)
-                data.data.money -= price
-                data.data.gems -= gems
                 data.save()
 
         return func
