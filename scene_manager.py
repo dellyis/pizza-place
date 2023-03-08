@@ -27,6 +27,9 @@ class HomeScene(BaseScene):
         self.button = Button("Начать", (640, 320), 32, Colors.light, Colors.primary,
                              lambda: scene_manager.change_scene("ClickerScene"))
         self.button.set_pos(((1280 - self.button.width) // 2, 400))
+        self.upgrades = Button("Бонусы", (640, 320), 32, Colors.light, Colors.primary,
+                               lambda: scene_manager.change_scene("UpgradeScene"))
+        self.upgrades.set_pos(((1280 - self.upgrades.width) // 2, 480))
 
     def draw(self):
         self.screen.fill(Colors.secondary)
@@ -39,9 +42,11 @@ class HomeScene(BaseScene):
         Label(f"День {data.day}", (25, 25), 32, Colors.warning).draw(self.screen)
 
         self.button.draw(self.screen)
+        self.upgrades.draw(self.screen)
 
     def handle_events(self, event):
         self.button.handle_event(event)
+        self.upgrades.handle_event(event)
 
     def on_change(self, new_day=False):
         if new_day:
